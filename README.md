@@ -21,4 +21,4 @@ Per executar en local: `python3 -m http.server 8000 --directory docs` i obrir `h
 Fan animation no oficial. Personatges Superman i Batman de DC; Spider-Man i Iron Man de Marvel. Sense afiliació a les seves propietàries. No s'inclouen models ni música extrets de pel·lícules.
 
 ## Validació
-Sintaxi JavaScript comprovada amb Node. La interfície s'ha carregat al navegador de verificació, però aquest entorn no disposa de WebGL: la validació visual del renderitzat 3D queda pendent en un dispositiu amb WebGL.
+Sintaxi JavaScript comprovada amb Node. També s’han validat 577 instants del curt: totes les transformacions i geometries són finites. La interfície s'ha carregat al navegador de verificació, però aquest entorn no disposa de WebGL: la validació visual del renderitzat 3D queda pendent en un dispositiu amb WebGL.
