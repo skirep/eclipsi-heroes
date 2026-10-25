@@ -12,7 +12,7 @@ Per executar en local: `python3 -m http.server 8000 --directory docs` i obrir `h
 
 ## Implementació
 - Three.js 0.170.0 inclòs a `docs/vendor/` (MIT); cap dependència CDN per al motor.
-- Personatges 3D estilitzats procedurals amb braços i cames articulats, capes deformables i emblemes.
+- Personatges basats en una malla humana anatòmica CC0: pell amb textura, ulls, cabell, 53 ossos, dits articulats, vestits PBR, màscares i plaques d’armadura. Capes deformables i emblemes.
 - 20 plans de càmera, diàlegs en català, ciutat procedural, portal, raigs i teranyines.
 - Música original amb Web Audio, activada per un gest de l'usuari.
 - Animació determinista: es pot saltar a qualsevol moment amb la barra temporal.
@@ -22,3 +22,7 @@ Fan animation no oficial. Personatges Superman i Batman de DC; Spider-Man i Iron
 
 ## Validació
 Sintaxi JavaScript comprovada amb Node. També s’han validat 577 instants del curt: totes les transformacions i geometries són finites. La interfície s'ha carregat al navegador de verificació, però aquest entorn no disposa de WebGL: la validació visual del renderitzat 3D queda pendent en un dispositiu amb WebGL.
+
+## Personatges anatòmics (v2)
+
+La malla humana substitueix els antics cossos d’el·lipsoides. Anatomia, pell i cabell MakeHuman/CharacterCreator CC0; vegeu `docs/assets/ATTRIBUTION.md`. Materials i accessoris dels herois són adaptacions pròpies. És una aproximació més natural, encara no un acabat fotorealista de cinema. Validació de 289 instants amb càrrega dels GLB i deformació real de les malles; cap transformació ni vèrtex no finit. La revisió WebGL continua limitada per l’entorn de verificació.
