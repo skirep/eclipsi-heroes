@@ -1,28 +1,43 @@
 # ECLIPSI — Col·lisió d'herois
 
-Un curt animat de 2 minuts i 24 segons, renderitzat en temps real amb Three.js. Superman i Batman s'enfronten a Spider-Man i Iron Man en una ciutat on Gotham i Nova York s'han superposat.
+Curt Three.js de 2 minuts i 24 segons. Superman i Batman contra Spider-Man i Iron Man; un nucli falsifica les signatures dels herois per alimentar una esquerda entre universos.
 
-## Història
-El nucli Eclipsi falsifica les signatures energètiques dels herois. Cadascú creu que els altres estan destruint la seva ciutat. Cada atac alimenta el portal. Batman detecta l'engany; el sentit aràcnid de Peter el confirma. Els quatre han de coordinar teranyines, repulsors i força kryptoniana per tancar l'esquerda.
+**Veure:** https://skirep.github.io/eclipsi-heroes/
 
-## Reproducció
-GitHub Pages serveix `docs/`. Prem **Veure el curt** per començar amb música sintetitzada original. Inclou pausa, barra temporal, silenci i pantalla completa. Tecla espai: pausa/reproducció. Compatible amb mòbil i escriptori amb WebGL.
+## Versió 3
 
-Per executar en local: `python3 -m http.server 8000 --directory docs` i obrir `http://localhost:8000`.
+- Quatre models específics amb vestits i textures propis, esquelets i animacions incloses. Els antics maniquins recolorits ja no es carreguen.
+- Superman: vol; Batman: cops i puntades; Spider-Man: balanceig i posició de repòs; Iron Man: seqüència de vol. Desplaçament general controlat per la coreografia del curt.
+- Terrassa amb instal·lacions, cables, torre d'aigua, bassal amb reflexió planar, façanes amb finestres instanciades, arquitectura gòtica i torres modernes.
+- Núvols procedurals, pluja, boira, llampecs puntuals, ombres, reflexos dels materials i postprocessat amb bloom suau i gra.
+- BSO original **Eclipsi / Four Signals**, renderitzada amb instruments mostrejats. Quatre passatges, motiu propi, percussió i accents coordinats amb el curt. MP3 de 160 kbps normalitzat a -16 LUFS.
+- Pausa, barra temporal, pantalla completa i silenci. La música es sincronitza en reprendre, saltar o reiniciar.
 
-## Implementació
-- Three.js 0.170.0 inclòs a `docs/vendor/` (MIT); cap dependència CDN per al motor.
-- Personatges basats en una malla humana anatòmica CC0: pell amb textura, ulls, cabell, 53 ossos, dits articulats, vestits PBR, màscares i plaques d’armadura. Capes deformables i emblemes.
-- 20 plans de càmera, diàlegs en català, ciutat procedural, portal, raigs i teranyines.
-- Música original amb Web Audio, activada per un gest de l'usuari.
-- Animació determinista: es pot saltar a qualsevol moment amb la barra temporal.
-- És una animació web, no un arxiu de vídeo prerenderitzat.
+Els models són models de videojoc texturitzats, no dobles digitals fotorealistes de pel·lícula. L'escenari és un mateix conjunt coherent de Gotham/Manhattan; no s'hi han afegit capítols nous.
 
-Fan animation no oficial. Personatges Superman i Batman de DC; Spider-Man i Iron Man de Marvel. Sense afiliació a les seves propietàries. No s'inclouen models ni música extrets de pel·lícules.
+## Executar
+
+GitHub Pages serveix `docs/`. Localment: `python3 -m http.server 8000 --directory docs`, després `http://localhost:8000`.
+
+Motor i models inclosos al repositori, sense CDN per al renderitzat. Només la tipografia té una alternativa externa opcional. Requereix WebGL i un gest de l'usuari per iniciar el so.
+
+## BSO reproduïble
+
+`tools/compose-score.cjs` conté els 2.768 esdeveniments musicals generats de manera determinista. Instal·la `tools/package.json` amb npm, obtén GeneralUser GS des de la pàgina oficial de S. Christian Collins, i executa:
+
+```sh
+cd tools
+npm install
+node compose-score.cjs /path/to/GeneralUser-GS.sf2 score.wav
+ffmpeg -i score.wav -af 'loudnorm=I=-16:TP=-1.5:LRA=10' -codec:a libmp3lame -b:a 160k ../docs/assets/eclipsi-score.mp3
+```
 
 ## Validació
-Sintaxi JavaScript comprovada amb Node. També s’han validat 577 instants del curt: totes les transformacions i geometries són finites. La interfície s'ha carregat al navegador de verificació, però aquest entorn no disposa de WebGL: la validació visual del renderitzat 3D queda pendent en un dispositiu amb WebGL.
 
-## Personatges anatòmics (v2)
+Sintaxi dels mòduls comprovada. Càrrega real dels quatre GLB i 289 instants de la coreografia validats: coordenades finites i cap deformació explosiva. Proves de pausa, seek i silenci de la BSO; enregistrament de 144 segons amb pic mesurat de -1,7 dBFS. Revisió de geometria amb renderitzat de comprovació independent.
 
-La malla humana substitueix els antics cossos d’el·lipsoides. Anatomia, pell i cabell MakeHuman/CharacterCreator CC0; vegeu `docs/assets/ATTRIBUTION.md`. Materials i accessoris dels herois són adaptacions pròpies. És una aproximació més natural, encara no un acabat fotorealista de cinema. Validació de 289 instants amb càrrega dels GLB i deformació real de les malles; cap transformació ni vèrtex no finit. La revisió WebGL continua limitada per l’entorn de verificació.
+El navegador de verificació no permet crear contextos WebGL; el renderitzat final de shaders, reflexió i llums en el navegador queda pendent d'una comprovació en un dispositiu amb WebGL. No s'ha substituït aquesta limitació per una afirmació de revisió visual completa.
+
+## Crèdits
+
+[Crèdits visibles a la web](docs/credits.html) i [fonts, llicències i adaptacions](docs/assets/ATTRIBUTION.md). Fan animation no oficial amb personatges de DC i Marvel. Three.js MIT.
